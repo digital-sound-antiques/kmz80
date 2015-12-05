@@ -3,7 +3,7 @@ Z80 Emulator for C by Mamiya 2006.
 
 The the original source can be found in the NEZplug source package at http://nezplug.sourceforge.net/
 
-This repository is a just copy of the original kmz80 except tiny patches below:
+This repository is just a copy of the original kmz80 except tiny patches below:
 
 - Change file encoding SJIS to UTF-8.
 - Suppress compiler warnings from modern C compilers.
