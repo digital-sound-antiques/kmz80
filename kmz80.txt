@@ -8,34 +8,34 @@ License:  PDS
 
 <Japanese(SJIS)>
 
-�ڐA���d��(�̂����)�� Z80/R800/HD84180/DMG-CPU �G�~�����[�^�[�ł��B
+移植性重視(のつもりの)の Z80/R800/HD84180/DMG-CPU エミュレーターです。
 
-����`�̓�����\�Ȍ���Č����Ă��܂��B
+未定義の動作も可能な限り再現しています。
 
-    �{�G�~�����[�^�[�� kmtypes.h �Œ�`������̌^��int�^�̂ݎg�p���܂��B
-    �ʏ�� kmz80set.h ������������K�v�͂���܂���B
+    本エミュレーターは kmtypes.h で定義される二つの型とint型のみ使用します。
+    通常は kmz80set.h を書き換える必要はありません。
 
     Uint32
-        0 ���� 0x1ffff �܂ł�\���鐮���^�Ȃ牽�ł��ǂ��ł��B
-        R800��Z���߂��T�|�[�g����ꍇ�� 0xffff * 0xffff �܂ŕK�v�ł��B
-        �Ȃ�ׂ������ɏ����ł�����̂��]�܂����ł��B
-        �ʏ�� unsigned int �^���œK�ł��B
-        �f�t�H���g�� unsigned int �ł��B
+        0 から 0x1ffff までを表せる整数型なら何でも良いです。
+        R800乗算命令をサポートする場合は 0xffff * 0xffff まで必要です。
+        なるべく高速に処理できるものが望ましいです。
+        通常は unsigned int 型が最適です。
+        デフォルトは unsigned int です。
 
     Uint8
-        0 ���� 0xff �܂ł�\���鐮���^�Ȃ牽�ł��ǂ��ł��B
-        �e�[�u���ɗp������^�Ȃ̂ŁA�z��ɂ����ꍇ�ɁA
-        �Ȃ�ׂ��������Ȃ���̂��]�܂����ł��B
-        �ʏ�� unsigned char �^���œK�ł��B
-        �f�t�H���g�� unsigned char �ł��B
+        0 から 0xff までを表せる整数型なら何でも良いです。
+        テーブルに用いられる型なので、配列にした場合に、
+        なるべく小さくなるものが望ましいです。
+        通常は unsigned char 型が最適です。
+        デフォルトは unsigned char です。
 
     int
-        M_�n�֐��̈ꕔ��1��-1��\���̂Ɏg�p���Ă��܂��B
-        '(Uint32)=(Uint32)+(int);' �ŃC���N�������g�A�f�N�������g���܂��B
-        ������^�ϊ��ɖ�肪�N����ꍇ��M_�n�}�N�����g�p���Ă��������B
+        M_系関数の一部で1か-1を表すのに使用しています。
+        '(Uint32)=(Uint32)+(int);' でインクリメント、デクリメントします。
+        万が一型変換に問題が起きる場合はM_系マクロを使用してください。
 
-    ���C�u����
-        ���̃��C�u�����ɂ͈ˑ����܂���B
+    ライブラリ
+        他のライブラリには依存しません。
 
-    �o�C�g�A���[�h�I�[�_�[
-        �ˑ����܂���B
+    バイト、ワードオーダー
+        依存しません。

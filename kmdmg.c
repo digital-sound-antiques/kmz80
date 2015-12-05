@@ -309,7 +309,7 @@ const static Uint8 kmdmg_ot_cbxx[0x20] = {
 };
 
 const static Uint8 kmdmg_ct[0x510] = {
-/* DMG ’Ç‰ÁƒNƒƒbƒN */
+/* DMG è¿½åŠ ã‚¯ãƒ­ãƒƒã‚¯ */
 /* XX		0 1 2 3 4 5 6 7  8 9 A B C D E F */
 /* 0 */		0,0,0,4,0,0,0,0, 0,4,0,4,0,0,0,0,
 /* 1 */	   28,0,0,4,0,0,0,0, 4,4,0,4,0,0,0,0,
@@ -401,21 +401,21 @@ const static Uint8 kmdmg_ct[0x510] = {
 /* F */		0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,
 
 	0,	/* 0x500 DJNZ */
-	0,	/* 0x501  •s¬—§ */
+	0,	/* 0x501  ä¸æˆç«‹ */
 	1,	/* 0x502 CALL cc */
-	0,	/* 0x503  •s¬—§ */
+	0,	/* 0x503  ä¸æˆç«‹ */
 	1,	/* 0x504 JR cc */
-	0,	/* 0x505  •s¬—§ */
+	0,	/* 0x505  ä¸æˆç«‹ */
 	1,	/* 0x506 JP cc */
-	0,	/* 0x507  •s¬—§ */
+	0,	/* 0x507  ä¸æˆç«‹ */
 	0,	/* 0x508 RET cc */
-	0,	/* 0x509  •s¬—§ */
+	0,	/* 0x509  ä¸æˆç«‹ */
 	0,	/* 0x50A CPDR CPIR INDR INIR LDDR LDIR ODIR OTIR */
-	0,	/* 0x50B  •s¬—§ */
+	0,	/* 0x50B  ä¸æˆç«‹ */
 	0,	/* 0x50C */
-	0,	/* 0x50D  •s¬—§ */
+	0,	/* 0x50D  ä¸æˆç«‹ */
 	0,	/* 0x50E OTIMR OTDMR */
-	0,	/* 0x50F  •s¬—§ */
+	0,	/* 0x50F  ä¸æˆç«‹ */
 };
 
 static Uint32 kmdmg_memread(KMZ80_CONTEXT *context, Uint32 a)
@@ -439,10 +439,10 @@ void kmdmg_reset(KMZ80_CONTEXT *context) {
 	M1CYCLE = 0;
 	MEMCYCLE = 4;
 	IOCYCLE = 4;
-	OPT = kmdmg_ot_xx;
-	OPTCB = kmdmg_ot_cbxx;
-	OPTED = 0;
-	CYT = kmdmg_ct;
+	context->opt = (void *)kmdmg_ot_xx;
+	context->optcb = (void *)kmdmg_ot_cbxx;
+	context->opted = (void *)0;
+	context->cyt = (void *)kmdmg_ct;
 	SYSMEMREAD = kmdmg_memread;
 	SYSMEMWRITE = kmdmg_memwrite;
 }

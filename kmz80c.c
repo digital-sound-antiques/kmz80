@@ -48,7 +48,7 @@ void dox(int pc, int i, int a, int hl, int bc)
 #define DEBUG_OUTPUT(i) {}
 #endif
 
-extern Uint8 flagtable[0x200] = {
+static Uint8 flagtable[0x200] = {
 /*
   0 <= i <= 0x1ff
   CF(bit0) (i > 0xff)
@@ -189,9 +189,9 @@ void kmz80_reset_common(KMZ80_CONTEXT *context) {
 	TFL += ((~tmp & (TOP ^ a)) >> 5) & PF; \
 	TFL += FLAGTBL(TOP) & (fs); \
 }
-#if 0	/* ƒ}ƒNƒ */
+#if 0	/* ãƒã‚¯ãƒ­ */
 #define M_ADC(a, fs) M_ADC_(a, fs)
-#else	/* ŠÖ” */
+#else	/* é–¢æ•° */
 static void M_ADC_FUNC(KMZ80_CONTEXT *context, Uint32 a, Uint32 fs) M_ADC_(a,fs)
 #define M_ADC(a, fs) M_ADC_FUNC(context, a, fs)
 #endif
@@ -277,7 +277,7 @@ static void M_ADC_FUNC(KMZ80_CONTEXT *context, Uint32 a, Uint32 fs) M_ADC_(a,fs)
 	F = TFL = TFL + ((TOP >> 6) & NF) + (FLAGTBL(B) & (SF | ZF | XF | YF | PF | CF)); \
 }
 
-#if 0	/* ƒ}ƒNƒ */
+#if 0	/* ãƒã‚¯ãƒ­ */
 #define M_ADC16(fs) M_ADC16_(fs)
 #define M_LDX(dir) M_LDX_(dir)
 #define M_CPX(dir) M_CPX_(dir)
@@ -286,7 +286,7 @@ static void M_ADC_FUNC(KMZ80_CONTEXT *context, Uint32 a, Uint32 fs) M_ADC_(a,fs)
 #define M_POSTIOX(dir) M_POSTIOX_(dir)
 #define M_OTXM(d) M_OTXM_(d)
 #define M_POSTOTXM(dir) M_POSTOTXM_(dir)
-#else	/* ŠÖ” */
+#else	/* é–¢æ•° */
 static void M_ADC16_FUNC(KMZ80_CONTEXT *context, Uint32 fs) M_ADC16_(fs)
 static void M_LDX_FUNC(KMZ80_CONTEXT *context, int dir) M_LDX_(dir)
 static void M_CPX_FUNC(KMZ80_CONTEXT *context, int dir) M_CPX_(dir)
@@ -467,7 +467,7 @@ Uint32 kmz80_exec(KMZ80_CONTEXT *context, Uint32 cycles)
 			switch (opp->op)
 			{
 				case OP_NOP: break;
-				/* ŒğŠ·–½—ß */
+				/* äº¤æ›å‘½ä»¤ */
 				case OP_EX_AF_AF:
 					{
 						Uint32 tmp;
@@ -499,7 +499,7 @@ Uint32 kmz80_exec(KMZ80_CONTEXT *context, Uint32 cycles)
 					}
 					break;
 
-				/* 8ƒrƒbƒg‰‰Z–½—ß */
+				/* 8ãƒ“ãƒƒãƒˆæ¼”ç®—å‘½ä»¤ */
 				case OP_ADD:
 					TFL = 0;
 					M_ADC(A, SF | ZF | XF | YF | CF);
@@ -562,12 +562,12 @@ Uint32 kmz80_exec(KMZ80_CONTEXT *context, Uint32 cycles)
 					}
 					break;
 				case OP_DAA:
-					/* HD64180‚ÉˆÃ–Ù‚ÌƒLƒƒƒŠ[ƒtƒ‰ƒO‚Í‘¶İ‚µ‚È‚¢ */
+					/* HD64180ã«æš—é»™ã®ã‚­ãƒ£ãƒªãƒ¼ãƒ•ãƒ©ã‚°ã¯å­˜åœ¨ã—ãªã„ */
 					if (!ICEXIST) TFL = F;
 					if (F & NF)
 					{
 						Uint32 ic;
-						ic = TFL & CF;	/* ˆÃ–Ù‚ÌƒLƒƒƒŠ[ƒtƒ‰ƒO */
+						ic = TFL & CF;	/* æš—é»™ã®ã‚­ãƒ£ãƒªãƒ¼ãƒ•ãƒ©ã‚° */
 						TFL = NF;
 						if ((F & HF) || ((TOP & 0x0f) > 0x09))
 						{
@@ -583,7 +583,7 @@ Uint32 kmz80_exec(KMZ80_CONTEXT *context, Uint32 cycles)
 					else
 					{
 						Uint32 ic;
-						ic = TFL & CF;	/* ˆÃ–Ù‚ÌƒLƒƒƒŠ[ƒtƒ‰ƒO */
+						ic = TFL & CF;	/* æš—é»™ã®ã‚­ãƒ£ãƒªãƒ¼ãƒ•ãƒ©ã‚° */
 						TFL = 0;
 						if ((F & HF) || ((TOP & 0x0f) > 0x09))
 						{
@@ -610,7 +610,7 @@ Uint32 kmz80_exec(KMZ80_CONTEXT *context, Uint32 cycles)
 					TFL ^= CF;
 					F = TFL;
 					break;
-				/* 16ƒrƒbƒg‰‰Z–½—ß */
+				/* 16ãƒ“ãƒƒãƒˆæ¼”ç®—å‘½ä»¤ */
 				case OP_ADD16:
 					TFL = 0;
 					M_ADC16(XF | YF | CF);
@@ -635,7 +635,7 @@ Uint32 kmz80_exec(KMZ80_CONTEXT *context, Uint32 cycles)
 					TOP = RTO16(TOP - 1);
 					break;
 
-				/* ƒuƒƒbƒN“]‘—–½—ß */
+				/* ãƒ–ãƒ­ãƒƒã‚¯è»¢é€å‘½ä»¤ */
 				case OP_LDI:
 					M_LDX(+1);
 					break;
@@ -649,7 +649,7 @@ Uint32 kmz80_exec(KMZ80_CONTEXT *context, Uint32 cycles)
 					M_CPX(-1);
 					break;
 
-				/* •ªŠò–½—ß */
+				/* åˆ†å²å‘½ä»¤ */
 				case OP_JP:
 					TPC = TOP;
 					break;
@@ -725,7 +725,7 @@ Uint32 kmz80_exec(KMZ80_CONTEXT *context, Uint32 cycles)
 					TPC = RSTBASE + (op0 & 0x38);
 					break;
 
-				/* ƒrƒbƒgzŠÂ–½—ß*/
+				/* ãƒ“ãƒƒãƒˆå¾ªç’°å‘½ä»¤*/
 				case OP_RLCA:
 					TOP = (TOP << 1) + ((TOP >> 7) & 1);
 					F = TFL = (F & (SF | ZF | HF | PF)) + (FLAGTBL(TOP) & (XF | YF | CF));
@@ -786,7 +786,7 @@ Uint32 kmz80_exec(KMZ80_CONTEXT *context, Uint32 cycles)
 					TOP = RTO8(TOP >> 4);
 					F = TFL = (F & CF) + (FLAGTBL(A) & (SF | ZF | XF | YF | PF));
 					break;
-				/* ƒrƒbƒg‘€ì–½—ß*/
+				/* ãƒ“ãƒƒãƒˆæ“ä½œå‘½ä»¤*/
 				case OP_BIT:
 					{
 						Uint32 tmp;
@@ -808,7 +808,7 @@ Uint32 kmz80_exec(KMZ80_CONTEXT *context, Uint32 cycles)
 						TOP |= 1 << ((op0 >> 3) & 7);
 					}
 					break;
-				/* “üo—Í–½—ß */
+				/* å…¥å‡ºåŠ›å‘½ä»¤ */
 				case OP_IN:
 					CYCLEIO;
 					TOP = IOREAD(TAD);
@@ -820,7 +820,7 @@ Uint32 kmz80_exec(KMZ80_CONTEXT *context, Uint32 cycles)
 					IOWRITE(TAD, TOP);
 					break;
 
-				/* ƒuƒƒbƒN“üo—Í–½—ß */
+				/* ãƒ–ãƒ­ãƒƒã‚¯å…¥å‡ºåŠ›å‘½ä»¤ */
 				case OP_INI:
 					M_INX(0);
 					M_POSTIOX(+1);
@@ -838,7 +838,7 @@ Uint32 kmz80_exec(KMZ80_CONTEXT *context, Uint32 cycles)
 					M_POSTIOX(-1);
 					break;
 
-				/* CPU§Œä–½—ß */
+				/* CPUåˆ¶å¾¡å‘½ä»¤ */
 				case OP_CCF:
 					F = TFL = ((F & (SF | ZF | PF | CF)) + (A & (XF | YF)) + ((F << 4) & HF)) ^ CF;
 					break;
@@ -933,11 +933,11 @@ Uint32 kmz80_exec(KMZ80_CONTEXT *context, Uint32 cycles)
 					STATE = ST_FD | ST_LOCKINT;
 					M_DECODE(OPT, 0x100);
 					continue;
-				/* maratZ80–½—ß */
+				/* maratZ80å‘½ä»¤ */
 				case OP_PATCH:
 					if (PATCHEDFE) PATCHEDFE(context->user, context);
 					break;
-				/* HD64180–½—ß */
+				/* HD64180å‘½ä»¤ */
 				case OP_TST:
 					TOP = TOP & A;
 					F = TFL = FLAGTBL(TOP) & (SF | ZF | XF | HF | YF | PF);
@@ -955,11 +955,11 @@ Uint32 kmz80_exec(KMZ80_CONTEXT *context, Uint32 cycles)
 					M_OTXM(0);
 					M_POSTOTXM(-1);
 					break;
-				/* HD64180æZ–½—ß */
+				/* HD64180ä¹—ç®—å‘½ä»¤ */
 				case OP_MLT:
 					TOP = RTO8(TOP) * RTO8(TOP >> 8);
 					break;
-				/* R800æZ–½—ß */
+				/* R800ä¹—ç®—å‘½ä»¤ */
 				case OP_MULUB:
 					TOP = TOP * A;
 					F = TFL = (TOP > 0xFF) + ((TOP == 0) << 6) + (F & (HF | PF));
@@ -968,7 +968,7 @@ Uint32 kmz80_exec(KMZ80_CONTEXT *context, Uint32 cycles)
 					TOP = TOP * TAD;
 					F = TFL = (TOP > 0xFFFF) + ((TOP == 0) << 6) + (F & (HF | PF));
 					break;
-				/* DMG–½—ß */
+				/* DMGå‘½ä»¤ */
 				case OP_SWAP:
 					TOP = RTO8(((TOP >> 4) & 0xf) + (TOP << 4));
 					F = TFL = TOP ? 0 : ZF;
@@ -1105,17 +1105,17 @@ Uint32 kmz80_exec(KMZ80_CONTEXT *context, Uint32 cycles)
 			}
 			PC = TPC;
 		} while (STATE & ST_LOCKINT);
-		/* ƒ†[ƒU[’è‹`ƒCƒxƒ“ƒgƒ^ƒCƒ}Às */
+		/* ãƒ¦ãƒ¼ã‚¶ãƒ¼å®šç¾©ã‚¤ãƒ™ãƒ³ãƒˆã‚¿ã‚¤ãƒå®Ÿè¡Œ */
 		if (context->kmevent)
 		{
 #if 1
-			/* HALT‚ÍŸ‚ÌƒCƒxƒ“ƒg‚Ü‚Åˆê‹C‚Éi‚ß‚é */
+			/* HALTæ™‚ã¯æ¬¡ã®ã‚¤ãƒ™ãƒ³ãƒˆã¾ã§ä¸€æ°—ã«é€²ã‚ã‚‹ */
 			if (HALTED && !NMIREQ && !INTREQ)
 			{
 				Uint32 nextcount;
 				if (kmevent_gettimer(context->kmevent, 0, &nextcount))
 				{
-					/* ƒCƒxƒ“ƒg—L‚è */
+					/* ã‚¤ãƒ™ãƒ³ãƒˆæœ‰ã‚Š */
 					if (CYCLE + nextcount < cycles)
 						CYCLE += nextcount;
 					else
@@ -1123,7 +1123,7 @@ Uint32 kmz80_exec(KMZ80_CONTEXT *context, Uint32 cycles)
 				}
 				else
 				{
-					/* ƒCƒxƒ“ƒg–³‚µ */
+					/* ã‚¤ãƒ™ãƒ³ãƒˆç„¡ã— */
 					CYCLE = cycles;
 				}
 			}
@@ -1131,7 +1131,7 @@ Uint32 kmz80_exec(KMZ80_CONTEXT *context, Uint32 cycles)
 			kmevent_process(context->kmevent, CYCLE - kmecycle);
 		}
 		kmecycle = CYCLE;
-		/* Š„‚è‚İó•t */
+		/* å‰²ã‚Šè¾¼ã¿å—ä»˜ */
 		if (NMIREQ)
 		{
 			if (HALTED)

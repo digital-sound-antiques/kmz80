@@ -366,9 +366,9 @@ void kmhd180_reset(KMZ80_CONTEXT *context) {
 	M1CYCLE = 0;
 	MEMCYCLE = 3;
 	IOCYCLE = 4;
-	OPT = kmz80_ot_xx;
-	OPTCB = kmz80_ot_cbxx;
-	OPTED = kmhd180_ot_edxx;
+	context->opt = (void *)kmz80_ot_xx;
+	context->optcb = (void *)kmz80_ot_cbxx;
+	context->opted = (void *)kmhd180_ot_edxx;
 	SYSMEMREAD = kmhd180_memread;
 	SYSMEMWRITE = kmhd180_memwrite;
 }
