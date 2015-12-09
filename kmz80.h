@@ -1,4 +1,4 @@
-/*
+﻿/*
   KMZ80 common header
   by Mamiya
 */

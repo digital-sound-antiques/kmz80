@@ -1,4 +1,4 @@
-/*
+﻿/*
   KMZ80 HD64180(not supported)
   by Mamiya
 */

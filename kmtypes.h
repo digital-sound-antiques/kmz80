@@ -1,4 +1,4 @@
-/*
+﻿/*
   KMxxx common header
   by Mamiya
 */

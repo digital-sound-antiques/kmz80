@@ -1,4 +1,4 @@
-/*
+﻿/*
   KMZ80 common table(Z80/HD64180/R800)
   by Mamiya
 */

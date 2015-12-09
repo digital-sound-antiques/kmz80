@@ -1,4 +1,4 @@
-/*
+﻿/*
   KMZ80 flag table builder
   by Mamiya
 */
