@@ -6,5 +6,11 @@ else()
   set(CMAKE_C_FLAGS "-O3 -Wall")
 endif()
 
-file(GLOB SOURCES *.c)
-add_library(kmz80 STATIC ${SOURCES})
+add_library(kmz80 STATIC 
+  kmdmg.c
+  kmevent.c
+  kmr800.c
+  kmz80.c
+  kmz80c.c
+  kmz80t.c
+)
