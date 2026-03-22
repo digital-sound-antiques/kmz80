@@ -1,4 +1,5 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.10)
+project(kmz80 LANGUAGES C)
 
 if(MSVC)
   set(CMAKE_C_FLAGS "/Ox /W3 /wd4996")
