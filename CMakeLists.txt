@@ -18,6 +18,6 @@ set_target_properties(kmz80 PROPERTIES
 )
 
 target_compile_options(kmz80 PRIVATE
-  $<$<C_COMPILER_ID:MSVC>:/W3 /wd4996>
-  $<$<NOT:$<C_COMPILER_ID:MSVC>>:-Wall>
+  $<$<C_COMPILER_ID:MSVC>:/W3 /WX /wd4996>
+  $<$<NOT:$<C_COMPILER_ID:MSVC>>:-Wall -Werror>
 )
