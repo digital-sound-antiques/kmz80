@@ -1,4 +1,4 @@
-﻿/*
+/*
   KMZ80 common(Z80/R800/DMG-CPU/HD64180)
   by Mamiya
 */

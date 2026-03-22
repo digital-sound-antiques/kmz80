@@ -1,4 +1,4 @@
-﻿/*
+/*
   KMZ80 Z80
   by Mamiya
 */

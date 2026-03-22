@@ -1,4 +1,4 @@
-﻿/*
+/*
   KMZ80 internal header
   by Mamiya
 */
