@@ -1,4 +1,4 @@
-﻿/*
+/*
   KMZ80 R800
   by Mamiya
 */

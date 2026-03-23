@@ -1,4 +1,4 @@
-﻿/*
+/*
   KMZ80 common(Z80/R800/DMG-CPU/HD64180)
   by Mamiya
 */
@@ -162,8 +162,10 @@ static Uint32 kmz80_fetch_im0(KMZ80_CONTEXT *context) {
 }
 
 void kmz80_reset_common(KMZ80_CONTEXT *context) {
-	B = C = D = E = F = H = L = A = F = IXH = IXL = IYH = IYL = 0;
-	R = R7 = I = IFF1 = IFF2 = IMODE = NMIREQ = INTREQ = HALTED = STATE = FDMG = 0;
+	B = C = D = E = H = L = A = IXH = IXL = IYH = IYL = 0;
+	F = 0;
+	R = IFF1 = IFF2 = IMODE = NMIREQ = INTREQ = HALTED = STATE = FDMG = 0;
+	R7 = 0; /* R7 and I alias the same register (REGID_R7) */
 	M1CYCLE = 0;
 	MEMCYCLE = 3;
 	IOCYCLE = 4;

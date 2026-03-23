@@ -1,4 +1,4 @@
-﻿/*
+/*
   KMxxx event timer
   by Mamiya
 */
